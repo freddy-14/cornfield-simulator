@@ -1,5 +1,9 @@
 package org.cornfields.simulator.game;
 
+import org.cornfields.simulator.CommandNotAllowedException;
+import org.cornfields.simulator.command.Command;
+import org.cornfields.simulator.command.RegisterCommand;
+import org.cornfields.simulator.command.TravelCommand;
 import org.cornfields.simulator.model.SmsResponse;
 
 public class CommandProcessor {

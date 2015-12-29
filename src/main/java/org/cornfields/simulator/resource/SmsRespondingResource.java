@@ -1,9 +1,9 @@
 package org.cornfields.simulator.resource;
 
 import com.codahale.metrics.annotation.Timed;
-import org.cornfields.simulator.game.Command;
-import org.cornfields.simulator.game.CommandFactory;
-import org.cornfields.simulator.game.CommandNotAllowedException;
+import org.cornfields.simulator.command.Command;
+import org.cornfields.simulator.command.CommandFactory;
+import org.cornfields.simulator.CommandNotAllowedException;
 import org.cornfields.simulator.game.CommandProcessor;
 import org.cornfields.simulator.model.SmsResponse;
 import org.hibernate.validator.constraints.NotEmpty;

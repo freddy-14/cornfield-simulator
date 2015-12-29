@@ -1,4 +1,6 @@
-package org.cornfields.simulator.game;
+package org.cornfields.simulator;
+
+import org.cornfields.simulator.command.Command;
 
 public class CommandNotAllowedException extends Exception {
 

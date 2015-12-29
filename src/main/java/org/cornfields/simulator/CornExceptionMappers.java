@@ -1,7 +1,6 @@
-package org.cornfields.simulator.resource;
+package org.cornfields.simulator;
 
-import org.cornfields.simulator.game.Command;
-import org.cornfields.simulator.game.CommandNotAllowedException;
+import org.cornfields.simulator.command.Command;
 import org.cornfields.simulator.model.SmsResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

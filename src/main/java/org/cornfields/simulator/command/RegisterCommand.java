@@ -1,4 +1,4 @@
-package org.cornfields.simulator.game;
+package org.cornfields.simulator.command;
 
 public class RegisterCommand extends Command {
 

@@ -2,13 +2,12 @@ package org.cornfields.simulator;
 
 import io.dropwizard.Application;
 import io.dropwizard.setup.Environment;
-import org.cornfields.simulator.game.CommandFactory;
+import org.cornfields.simulator.command.CommandFactory;
 import org.cornfields.simulator.game.CommandProcessor;
 import org.cornfields.simulator.health.DumbCheck;
-import org.cornfields.simulator.resource.CornExceptionMappers;
 import org.cornfields.simulator.resource.SmsRespondingResource;
 
-public class CornfieldSimApplication extends Application<CornConfig> {
+public class CornApplication extends Application<CornConfig> {
 
   @Override
   public String getName() {
@@ -28,7 +27,7 @@ public class CornfieldSimApplication extends Application<CornConfig> {
   }
 
   public static void main(String[] args) throws Exception {
-    new CornfieldSimApplication().run(args);
+    new CornApplication().run(args);
   }
 
 }

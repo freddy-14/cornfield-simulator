@@ -1,4 +1,4 @@
-package org.cornfields.simulator.game;
+package org.cornfields.simulator.command;
 
 import org.junit.Test;
 
@@ -8,7 +8,7 @@ public class CommandFactoryTest {
 
   @Test
   public void testBadCommandType() {
-    final CommandFactory    factory = new CommandFactory();
+    final CommandFactory factory = new CommandFactory();
     final Optional<Command> command = factory.create("123", "BADTYPE");
 
     assert !command.isPresent();
@@ -39,7 +39,7 @@ public class CommandFactoryTest {
   }
 
   @Test
-  public void testCommandTypeTravelNoArgs() {
+  public void testCommandTypeTravelNoArgument() {
     final CommandFactory    factory = new CommandFactory();
     final Optional<Command> command = factory.create("123", "TRAVEL");
 
