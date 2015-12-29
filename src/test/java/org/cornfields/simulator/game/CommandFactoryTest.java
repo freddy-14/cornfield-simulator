@@ -30,4 +30,20 @@ public class CommandFactoryTest {
     assert command.isPresent();
   }
 
+  @Test
+  public void testCommandTypeTravel() {
+    final CommandFactory    factory = new CommandFactory();
+    final Optional<Command> command = factory.create("123", "TRAVEL 1");
+
+    assert command.isPresent();
+  }
+
+  @Test
+  public void testCommandTypeTravelNoArgs() {
+    final CommandFactory    factory = new CommandFactory();
+    final Optional<Command> command = factory.create("123", "TRAVEL");
+
+    assert !command.isPresent();
+  }
+
 }
