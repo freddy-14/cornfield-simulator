@@ -2,6 +2,7 @@ package org.cornfields.simulator.game;
 
 import org.cornfields.simulator.CommandNotAllowedException;
 import org.cornfields.simulator.command.TravelCommand;
+import org.cornfields.simulator.model.Farmer;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
-public class CornfieldMap {
+public class CornfieldMap implements FarmerDatabaseListener {
 
   private final Map<Long, Cornfield> cornfields = new ConcurrentHashMap<>();
   private final Object               txnLock    = new Object();
@@ -56,6 +57,17 @@ public class CornfieldMap {
                 .farmers.add(travel.getFarmerId());
     }
   }
+
+  @Override
+  public void onFarmerUnRegistered(Farmer farmer) {
+    Optional<Cornfield> cornfield = findFieldFarmedBy(farmer.getFarmerId());
+    if (cornfield.isPresent()) {
+      cornfield.get().farmers.remove(farmer.getFarmerId());
+    }
+  }
+
+  @Override
+  public void onFarmerRegistered(Farmer farmer) { }
 
   public static class Cornfield {
 

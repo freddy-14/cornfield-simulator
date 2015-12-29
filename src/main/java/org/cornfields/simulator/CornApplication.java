@@ -18,15 +18,19 @@ public class CornApplication extends Application<CornConfig> {
 
   @Override
   public void run(CornConfig config, Environment environment) throws Exception {
-    CommandFactory commandFactory = new CommandFactory();
-    FarmerDatabase farmers        = new FarmerDatabase();
-    CornfieldMap   cornfields     = new CornfieldMap();
-    Simulator      simulator      = new Simulator(farmers, cornfields);
+    FarmerDatabase farmers    = new FarmerDatabase();
+    CornfieldMap   cornfields = new CornfieldMap();
+    Simulator      simulator  = new Simulator(farmers, cornfields);
+
+    farmers.addListener(cornfields);
+
+    CommandFactory        commandFactory = new CommandFactory();
+    SmsRespondingResource smsResponder   = new SmsRespondingResource(commandFactory, simulator);
 
     environment.healthChecks().register("dumb", new DumbCheck());
 
     environment.jersey().register(new CornExceptionMappers.CommandNotAllowed());
-    environment.jersey().register(new SmsRespondingResource(commandFactory, simulator));
+    environment.jersey().register(smsResponder);
   }
 
   public static void main(String[] args) throws Exception {
