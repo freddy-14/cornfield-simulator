@@ -4,7 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import org.cornfields.simulator.command.Command;
 import org.cornfields.simulator.command.CommandFactory;
 import org.cornfields.simulator.CommandNotAllowedException;
-import org.cornfields.simulator.game.CommandProcessor;
+import org.cornfields.simulator.game.Simulator;
 import org.cornfields.simulator.model.SmsResponse;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -19,12 +19,12 @@ import java.util.Optional;
 @Produces(MediaType.APPLICATION_JSON)
 public class SmsRespondingResource {
 
-  private final CommandFactory   commands;
-  private final CommandProcessor processor;
+  private final CommandFactory commands;
+  private final Simulator      simulator;
 
-  public SmsRespondingResource(CommandFactory commands, CommandProcessor processor) {
+  public SmsRespondingResource(CommandFactory commands, Simulator simulator) {
     this.commands  = commands;
-    this.processor = processor;
+    this.simulator = simulator;
   }
 
   @GET
@@ -38,7 +38,7 @@ public class SmsRespondingResource {
     if (!command.isPresent()) {
       return new SmsResponse(sourceNumber, "unknown command or bad command arguments");
     } else {
-      return processor.process(command.get());
+      return simulator.process(command.get());
     }
   }
 

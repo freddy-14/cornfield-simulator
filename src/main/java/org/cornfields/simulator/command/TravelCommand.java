@@ -7,7 +7,15 @@ public class TravelCommand extends Command {
   public TravelCommand(String farmerId, String argument) {
     super(Type.TRAVEL, farmerId);
 
-    this.cornfieldId = Long.parseLong(argument);
+    Long parsed;
+
+    try {
+      parsed = Long.parseLong(argument);
+    } catch (NumberFormatException e) {
+      parsed = -1l;
+    }
+
+    this.cornfieldId = parsed;
   }
 
   public Long getCornfieldId() {
