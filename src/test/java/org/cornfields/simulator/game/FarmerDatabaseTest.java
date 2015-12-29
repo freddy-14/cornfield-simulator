@@ -34,4 +34,54 @@ public class FarmerDatabaseTest {
     }
   }
 
+  @Test
+  public void testRegisterExistingFarmer() throws Exception {
+    final FarmerDatabase farmers = new FarmerDatabase();
+
+    farmers.register(new RegisterCommand("123", "CORN"));
+
+    try {
+
+      farmers.register(new RegisterCommand("123", "CORN"));
+      assert false;
+
+    } catch (CommandNotAllowedException e) {
+      assert true;
+    }
+  }
+
+  @Test
+  public void testRegisterExistingAlias() throws Exception {
+    final FarmerDatabase farmers = new FarmerDatabase();
+
+    farmers.register(new RegisterCommand("123", "CORN"));
+
+    try {
+
+      farmers.register(new RegisterCommand("456", "CORN"));
+      assert false;
+
+    } catch (CommandNotAllowedException e) {
+      assert true;
+    }
+  }
+
+  @Test
+  public void testRegister() throws Exception {
+    final FarmerDatabase farmers = new FarmerDatabase();
+
+    farmers.register(new RegisterCommand("123", "CORN"));
+    assert farmers.get("123").isPresent();
+  }
+
+  @Test
+  public void testUnregister() throws Exception {
+    final FarmerDatabase farmers = new FarmerDatabase();
+
+    farmers.register(new RegisterCommand("123", "CORN"));
+    assert farmers.get("123").isPresent();
+    farmers.unregister("123");
+    assert !farmers.get("123").isPresent();
+  }
+
 }
