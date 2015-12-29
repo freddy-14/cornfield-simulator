@@ -35,6 +35,10 @@ public class SmsProcessingResource {
       throw new WebApplicationException(Response.Status.BAD_REQUEST);
     }
 
+    if(command.get().getType() == Command.Type.CORN) {
+      return new SmsResponse(sourceNumber, "not corn");
+    }
+
     return new SmsResponse(sourceNumber, "corn");
   }
 
