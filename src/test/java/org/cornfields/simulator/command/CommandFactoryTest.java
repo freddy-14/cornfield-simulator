@@ -1,4 +1,4 @@
-package org.cornfields.simulator.game;
+package org.cornfields.simulator.command;
 
 import org.junit.Test;
 
@@ -8,8 +8,8 @@ public class CommandFactoryTest {
 
   @Test
   public void testBadCommandType() {
-    final CommandFactory    factory = new CommandFactory();
-    final Optional<Command> command = factory.create("123", "BADTYPE");
+    final CommandFactory factory = new CommandFactory();
+    final Optional<Command> command = factory.create("555", "BADTYPE");
 
     assert !command.isPresent();
   }
@@ -17,7 +17,7 @@ public class CommandFactoryTest {
   @Test
   public void testCommandTypeRegisterNoArgument() {
     final CommandFactory    factory = new CommandFactory();
-    final Optional<Command> command = factory.create("123", "REGISTER");
+    final Optional<Command> command = factory.create("555", "REGISTER");
 
     assert !command.isPresent();
   }
@@ -25,7 +25,7 @@ public class CommandFactoryTest {
   @Test
   public void testCommandTypeRegister() {
     final CommandFactory    factory = new CommandFactory();
-    final Optional<Command> command = factory.create("123", "REGISTER leaf");
+    final Optional<Command> command = factory.create("555", "REGISTER leaf");
 
     assert command.isPresent();
   }
@@ -33,15 +33,15 @@ public class CommandFactoryTest {
   @Test
   public void testCommandTypeTravel() {
     final CommandFactory    factory = new CommandFactory();
-    final Optional<Command> command = factory.create("123", "TRAVEL 1");
+    final Optional<Command> command = factory.create("555", "TRAVEL 1");
 
     assert command.isPresent();
   }
 
   @Test
-  public void testCommandTypeTravelNoArgs() {
+  public void testCommandTypeTravelNoArgument() {
     final CommandFactory    factory = new CommandFactory();
-    final Optional<Command> command = factory.create("123", "TRAVEL");
+    final Optional<Command> command = factory.create("555", "TRAVEL");
 
     assert !command.isPresent();
   }
