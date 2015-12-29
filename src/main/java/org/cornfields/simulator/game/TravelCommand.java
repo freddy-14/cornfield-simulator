@@ -1,18 +1,16 @@
 package org.cornfields.simulator.game;
 
-/**
- * Created by freddy on 12/29/15.
- */
 public class TravelCommand extends Command {
 
-  final Integer cornfieldId;
+  final Long cornfieldId;
 
-  public TravelCommand(Type type, String user, String argument) {
-    super(type, user);
-    this.cornfieldId = Integer.parseInt(argument);
+  public TravelCommand(Type type, String farmerId, String argument) {
+    super(type, farmerId);
+
+    this.cornfieldId = Long.parseLong(argument);
   }
 
-  public Integer getCornfieldId() {
+  public Long getCornfieldId() {
     return cornfieldId;
   }
 

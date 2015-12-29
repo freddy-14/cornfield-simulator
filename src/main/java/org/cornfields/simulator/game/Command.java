@@ -6,20 +6,20 @@ public class Command {
     REGISTER, TRAVEL, CORN
   }
 
-  private final Type type;
-  private final String user;
+  private final Type   type;
+  private final String farmerId;
 
-  public Command(Type type, String user) {
-    this.type = type;
-    this.user = user;
+  public Command(Type type, String farmerId) {
+    this.type     = type;
+    this.farmerId = farmerId;
   }
 
   public Type getType() {
     return type;
   }
 
-  public String getUser() {
-    return user;
+  public String getFarmerId() {
+    return farmerId;
   }
 
 }

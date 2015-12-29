@@ -1,14 +1,12 @@
 package org.cornfields.simulator.game;
 
-/**
- * Created by freddy on 12/29/15.
- */
 public class RegisterCommand extends Command {
 
-  String alias;
+  private final String alias;
 
-  public RegisterCommand(Type type, String user, String argument) {
-    super(type, user);
+  public RegisterCommand(Type type, String farmerId, String argument) {
+    super(type, farmerId);
+
     this.alias = argument;
   }
 
