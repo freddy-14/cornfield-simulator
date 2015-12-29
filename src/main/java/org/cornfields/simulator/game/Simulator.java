@@ -23,8 +23,12 @@ public class Simulator {
         return new SmsResponse(command.getFarmerId(), "ok");
 
       case TRAVEL:
-        cornfieldMap.travel((TravelCommand) command);
-        return new SmsResponse(command.getFarmerId(), "ok");
+        if (!farmerDatabase.get(command.getFarmerId()).isPresent()) {
+          throw new CommandNotAllowedException(command, "farmer not registered");
+        } else {
+          cornfieldMap.travel((TravelCommand) command);
+          return new SmsResponse(command.getFarmerId(), "ok");
+        }
 
       case CORN:
         return new SmsResponse(command.getFarmerId(), "ok");

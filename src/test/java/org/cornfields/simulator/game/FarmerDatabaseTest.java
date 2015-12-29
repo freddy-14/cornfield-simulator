@@ -12,7 +12,7 @@ public class FarmerDatabaseTest {
 
     try {
 
-      farmers.register(new RegisterCommand("123", ""));
+      farmers.register(new RegisterCommand("555", ""));
       assert false;
 
     } catch (CommandNotAllowedException e) {
@@ -26,7 +26,7 @@ public class FarmerDatabaseTest {
 
     try {
 
-      farmers.register(new RegisterCommand("123", "dogeeeeeee"));
+      farmers.register(new RegisterCommand("555", "dogeeeeeee"));
       assert false;
 
     } catch (CommandNotAllowedException e) {
@@ -38,11 +38,11 @@ public class FarmerDatabaseTest {
   public void testRegisterExistingFarmer() throws Exception {
     final FarmerDatabase farmers = new FarmerDatabase();
 
-    farmers.register(new RegisterCommand("123", "CORN"));
+    farmers.register(new RegisterCommand("555", "CORN"));
 
     try {
 
-      farmers.register(new RegisterCommand("123", "CORN"));
+      farmers.register(new RegisterCommand("555", "CORN"));
       assert false;
 
     } catch (CommandNotAllowedException e) {
@@ -54,11 +54,11 @@ public class FarmerDatabaseTest {
   public void testRegisterExistingAlias() throws Exception {
     final FarmerDatabase farmers = new FarmerDatabase();
 
-    farmers.register(new RegisterCommand("123", "CORN"));
+    farmers.register(new RegisterCommand("555", "CORN"));
 
     try {
 
-      farmers.register(new RegisterCommand("456", "CORN"));
+      farmers.register(new RegisterCommand("666", "CORN"));
       assert false;
 
     } catch (CommandNotAllowedException e) {
@@ -70,18 +70,18 @@ public class FarmerDatabaseTest {
   public void testRegister() throws Exception {
     final FarmerDatabase farmers = new FarmerDatabase();
 
-    farmers.register(new RegisterCommand("123", "CORN"));
-    assert farmers.get("123").isPresent();
+    farmers.register(new RegisterCommand("555", "CORN"));
+    assert farmers.get("555").isPresent();
   }
 
   @Test
   public void testUnregister() throws Exception {
     final FarmerDatabase farmers = new FarmerDatabase();
 
-    farmers.register(new RegisterCommand("123", "CORN"));
-    assert farmers.get("123").isPresent();
-    farmers.unregister("123");
-    assert !farmers.get("123").isPresent();
+    farmers.register(new RegisterCommand("555", "CORN"));
+    assert farmers.get("555").isPresent();
+    farmers.unregister("555");
+    assert !farmers.get("555").isPresent();
   }
 
 }
