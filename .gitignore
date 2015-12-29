@@ -1,0 +1,10 @@
+corn.yml
+
+target/
+.idea/
+
+*.class
+*.jar
+*.iml
+
+notes.txt
