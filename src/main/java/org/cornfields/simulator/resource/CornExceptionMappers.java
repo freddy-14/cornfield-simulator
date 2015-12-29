@@ -1,4 +1,4 @@
-package org.cornfields.simulator;
+package org.cornfields.simulator.resource;
 
 import org.cornfields.simulator.game.Command;
 import org.cornfields.simulator.game.CommandNotAllowedException;

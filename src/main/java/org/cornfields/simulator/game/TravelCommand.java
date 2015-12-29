@@ -4,8 +4,8 @@ public class TravelCommand extends Command {
 
   final Long cornfieldId;
 
-  public TravelCommand(Type type, String farmerId, String argument) {
-    super(type, farmerId);
+  public TravelCommand(String farmerId, String argument) {
+    super(Type.TRAVEL, farmerId);
 
     this.cornfieldId = Long.parseLong(argument);
   }

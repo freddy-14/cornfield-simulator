@@ -5,6 +5,7 @@ import io.dropwizard.setup.Environment;
 import org.cornfields.simulator.game.CommandFactory;
 import org.cornfields.simulator.game.CommandProcessor;
 import org.cornfields.simulator.health.DumbCheck;
+import org.cornfields.simulator.resource.CornExceptionMappers;
 import org.cornfields.simulator.resource.SmsRespondingResource;
 
 public class CornfieldSimApplication extends Application<CornConfig> {

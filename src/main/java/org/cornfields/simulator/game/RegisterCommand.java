@@ -4,8 +4,8 @@ public class RegisterCommand extends Command {
 
   private final String alias;
 
-  public RegisterCommand(Type type, String farmerId, String argument) {
-    super(type, farmerId);
+  public RegisterCommand(String farmerId, String argument) {
+    super(Type.REGISTER, farmerId);
 
     this.alias = argument;
   }

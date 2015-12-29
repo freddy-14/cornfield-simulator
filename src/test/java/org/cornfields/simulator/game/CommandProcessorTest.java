@@ -10,7 +10,7 @@ public class CommandProcessorTest {
 
     try {
 
-      processor.process(new RegisterCommand(Command.Type.REGISTER, "123", "dogeeeee"));
+      processor.process(new RegisterCommand("123", "dogeeeee"));
       assert false;
 
     } catch (CommandNotAllowedException e) {
@@ -24,7 +24,7 @@ public class CommandProcessorTest {
 
     try {
 
-      processor.process(new TravelCommand(Command.Type.TRAVEL, "123", "9001"));
+      processor.process(new TravelCommand("123", "9001"));
       assert false;
 
     } catch (CommandNotAllowedException e) {
