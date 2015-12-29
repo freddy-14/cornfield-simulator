@@ -10,8 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class FarmerDatabase {
 
-  private static final Long INITIAL_CORNFIELD = -1l;
-  private static final Long INITIAL_CORN      = 100l;
+  private static final Long INITIAL_CORN = 100l;
 
   private final Map<String, Farmer> farmers = new ConcurrentHashMap<>();
   private final Object              txnLock = new Object();
@@ -20,7 +19,6 @@ public class FarmerDatabase {
     return new Farmer(
         registration.getFarmerId(),
         registration.getAlias(),
-        INITIAL_CORNFIELD,
         INITIAL_CORN
     );
   }

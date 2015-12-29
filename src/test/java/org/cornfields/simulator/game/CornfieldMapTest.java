@@ -26,8 +26,8 @@ public class CornfieldMapTest {
 
     cornfieldMap.travel(new TravelCommand("555", "8"));
 
-    assert cornfieldMap.getFarmersOn(8l).size() == 1;
-    assert cornfieldMap.getFarmersOn(8l).contains("555");
+    assert cornfieldMap.getCornfield(8l).getFarmers().size() == 1;
+    assert cornfieldMap.getCornfield(8l).getFarmers().contains("555");
   }
 
   @Test
@@ -36,14 +36,14 @@ public class CornfieldMapTest {
 
     cornfieldMap.travel(new TravelCommand("555", "8"));
 
-    assert cornfieldMap.getFarmersOn(8l).size() == 1;
-    assert cornfieldMap.getFarmersOn(8l).contains("555");
+    assert cornfieldMap.getCornfield(8l).getFarmers().size() == 1;
+    assert cornfieldMap.getCornfield(8l).getFarmers().contains("555");
 
     cornfieldMap.travel(new TravelCommand("555", "9"));
 
-    assert cornfieldMap.getFarmersOn(8l).size() == 0;
-    assert cornfieldMap.getFarmersOn(9l).size() == 1;
-    assert cornfieldMap.getFarmersOn(9l).contains("555");
+    assert cornfieldMap.getCornfield(8l).getFarmers().size() == 0;
+    assert cornfieldMap.getCornfield(9l).getFarmers().size() == 1;
+    assert cornfieldMap.getCornfield(9l).getFarmers().contains("555");
   }
 
 }

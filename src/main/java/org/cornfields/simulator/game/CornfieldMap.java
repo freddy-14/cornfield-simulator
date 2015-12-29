@@ -18,19 +18,26 @@ public class CornfieldMap {
 
   public CornfieldMap() {
     LongStream.range(1, 11)
-              .forEach(l -> cornfields.put(l, new Cornfield()));
+              .forEach(l -> cornfields.put(l, new Cornfield(l)));
   }
 
   private Optional<Cornfield> findFieldFarmedBy(String farmerId) {
     return cornfields.keySet()
                      .stream()
                      .map(cornfields::get)
-                     .filter(cornfield -> cornfield.getFarmers().contains(farmerId))
+                     .filter(cornfield -> cornfield.farmers.contains(farmerId))
                      .findAny();
   }
 
-  public List<Long> getCornfieldIds() {
-    return cornfields.keySet().stream().collect(Collectors.toList());
+  public Cornfield getCornfield(Long cornfieldId) {
+    return cornfields.get(cornfieldId);
+  }
+
+  public List<Cornfield> getCornfields() {
+    return cornfields.keySet()
+                     .stream()
+                     .map(cornfields::get)
+                     .collect(Collectors.toList());
   }
 
   public void travel(TravelCommand travel) throws CommandNotAllowedException {
@@ -42,38 +49,45 @@ public class CornfieldMap {
       Optional<Cornfield> fromField = findFieldFarmedBy(travel.getFarmerId());
 
       if (fromField.isPresent()) {
-        fromField.get().removeFarmer(travel.getFarmerId());
+        fromField.get().farmers.remove(travel.getFarmerId());
       }
 
       cornfields.get(travel.getCornfieldId())
-                .addFarmer(travel.getFarmerId());
+                .farmers.add(travel.getFarmerId());
     }
   }
 
-  public List<String> getFarmersOn(Long cornfieldId) {
-    Optional<Cornfield> cornfield = Optional.ofNullable(cornfields.get(cornfieldId));
+  public static class Cornfield {
 
-    if (!cornfield.isPresent()) {
-      throw new IllegalArgumentException("unknown cornfield id: " + cornfield);
-    } else {
-      return cornfield.get().getFarmers();
-    }
-  }
-
-  private static class Cornfield {
     private final List<String> farmers = new LinkedList<>();
+    private final Long id;
+    private long corn;
 
-    protected void addFarmer(String farmerId) {
-      farmers.add(farmerId);
+    protected Cornfield(Long id) {
+      this.id = id;
     }
 
-    protected void removeFarmer(String farmerId) {
-      farmers.remove(farmerId);
+    public Long getId() {
+      return id;
     }
 
-    protected List<String> getFarmers() {
-      return farmers;
+    public List<String> getFarmers() {
+      return farmers.stream().collect(Collectors.toList());
     }
+
+    public long countCorn() {
+      return corn;
+    }
+
+    public void growCorn(long growCount) {
+      corn += growCount;
+    }
+
+    public long harvestCorn() {
+      long harvestCount = corn;
+      corn = 0l;
+      return harvestCount;
+    }
+
   }
-
 }
