@@ -12,9 +12,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import java.util.Optional;
 
 @Path("/sms")
@@ -38,7 +36,7 @@ public class SmsRespondingResource {
     Optional<Command> command = commands.create(sourceNumber, message);
 
     if (!command.isPresent()) {
-      throw new WebApplicationException(Response.Status.BAD_REQUEST);
+      return new SmsResponse(sourceNumber, "unknown command or bad command arguments");
     } else {
       return processor.process(command.get());
     }

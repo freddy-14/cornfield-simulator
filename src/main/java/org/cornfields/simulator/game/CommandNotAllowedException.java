@@ -2,12 +2,15 @@ package org.cornfields.simulator.game;
 
 public class CommandNotAllowedException extends Exception {
 
-  public CommandNotAllowedException(String message) {
+  private final Command command;
+
+  public CommandNotAllowedException(Command command, String message) {
     super(message);
+    this.command = command;
   }
 
-  public CommandNotAllowedException(String message, Throwable cause) {
-    super(message, cause);
+  public Command getCommand() {
+    return command;
   }
 
 }

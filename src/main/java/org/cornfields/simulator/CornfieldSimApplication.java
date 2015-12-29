@@ -21,6 +21,8 @@ public class CornfieldSimApplication extends Application<CornConfig> {
     SmsRespondingResource smsResponder     = new SmsRespondingResource(commandFactory, commandProcessor);
 
     environment.healthChecks().register("dumb", new DumbCheck());
+
+    environment.jersey().register(new CornExceptionMappers.CommandNotAllowed());
     environment.jersey().register(smsResponder);
   }
 
