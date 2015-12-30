@@ -35,15 +35,12 @@ public class Simulator {
         return new SmsResponse(command.getFarmerId(), "ok");
 
       case CORN:
+        // todo: return a count of the farmers corn instead
         return new SmsResponse(command.getFarmerId(), "ok");
 
       case UNREGISTER:
         farmerDatabase.unregister(command.getFarmerId());
         return new SmsResponse(command.getFarmerId(), "goodbye");
-
-      // todo: implement the UNREGISTER command
-
-
 
       default:
         throw new IllegalArgumentException("I don't know about " + command.getType());
