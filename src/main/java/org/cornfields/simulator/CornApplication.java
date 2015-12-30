@@ -8,6 +8,8 @@ import org.cornfields.simulator.game.FarmerDatabase;
 import org.cornfields.simulator.game.Simulator;
 import org.cornfields.simulator.health.DumbCheck;
 import org.cornfields.simulator.resource.SmsRespondingResource;
+import org.cornfields.simulator.task.CornGrowTask;
+import org.cornfields.simulator.task.CornHarvestTask;
 
 public class CornApplication extends Application<CornConfig> {
 
@@ -28,6 +30,9 @@ public class CornApplication extends Application<CornConfig> {
     SmsRespondingResource smsResponder   = new SmsRespondingResource(commandFactory, simulator);
 
     environment.healthChecks().register("dumb", new DumbCheck());
+
+    environment.admin().addTask(new CornGrowTask(cornfields));
+    environment.admin().addTask(new CornHarvestTask(farmers, cornfields));
 
     environment.jersey().register(new CornExceptionMappers.CommandNotAllowed());
     environment.jersey().register(smsResponder);

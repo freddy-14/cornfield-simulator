@@ -1,19 +1,18 @@
-package org.cornfields.simulator.game.event;
+package org.cornfields.simulator.task;
 
 import org.cornfields.simulator.game.CornfieldMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.concurrent.Callable;
+public class CornGrowTask extends CallableTask<Long> {
 
-public class CornGrowEvent implements Callable<Long> {
-
-  private static final Logger log = LoggerFactory.getLogger(CornGrowEvent.class);
+  private static final Logger log = LoggerFactory.getLogger(CornGrowTask.class);
 
   private final CornfieldMap cornfieldMap;
   private long totalGrowCount = 0l;
 
-  public CornGrowEvent(CornfieldMap cornfieldMap) {
+  public CornGrowTask(CornfieldMap cornfieldMap) {
+    super("grow-cornfields");
     this.cornfieldMap = cornfieldMap;
   }
 

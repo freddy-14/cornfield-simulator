@@ -1,4 +1,4 @@
-package org.cornfields.simulator.game.event;
+package org.cornfields.simulator.task;
 
 import org.cornfields.simulator.game.CornfieldMap;
 import org.cornfields.simulator.game.FarmerDatabase;
@@ -7,20 +7,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
-import java.util.concurrent.Callable;
 
-public class CornHarvestEvent implements Callable<Long> {
+public class CornHarvestTask extends CallableTask<Long> {
 
-  private static final Logger log = LoggerFactory.getLogger(CornHarvestEvent.class);
+  private static final Logger log = LoggerFactory.getLogger(CornHarvestTask.class);
 
-  private final CornfieldMap   cornfieldMap;
   private final FarmerDatabase farmerDatabase;
+  private final CornfieldMap   cornfieldMap;
 
   private long totalHarvestCount = 0l;
 
-  public CornHarvestEvent(CornfieldMap cornfieldMap, FarmerDatabase farmerDatabase) {
-    this.cornfieldMap   = cornfieldMap;
+  public CornHarvestTask(FarmerDatabase farmerDatabase, CornfieldMap cornfieldMap) {
+    super("harvest-cornfields");
     this.farmerDatabase = farmerDatabase;
+    this.cornfieldMap   = cornfieldMap;
   }
 
   private void shareCornWithFarmer(String farmerId, long cornCount) {

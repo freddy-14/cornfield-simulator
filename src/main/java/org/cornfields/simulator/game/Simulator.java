@@ -33,6 +33,8 @@ public class Simulator {
       case CORN:
         return new SmsResponse(command.getFarmerId(), "ok");
 
+      // todo: implement the UNREGISTER command
+
       default:
         throw new IllegalArgumentException("I don't know about " + command.getType());
     }
