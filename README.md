@@ -3,7 +3,9 @@
 SMS based cornfield simulator.
 
 ## Configure
-Copy `config.tml` to `corn.yml` and modify as you see fit.
+Copy `config.tml` to `corn.yml`, add your Twilio credentials, and modify as you
+see fit. Then, point your Twilio 'Request URL' to http://<hostname>:<port>/sms
+and set request type to 'GET'.
 
 ## Build
 ```

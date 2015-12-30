@@ -18,9 +18,9 @@ public class CommandFactory {
     } else if (commandString.equals("TRAVEL") & argument.isPresent()) {
       return Optional.of(new TravelCommand(sourceNumber, argument.get()));
     } else if (commandString.equals("CORN")) {
-      return Optional.of(new Command(Command.Type.CORN, sourceNumber));
+      return Optional.of(new CornCommand(sourceNumber));
     } else if(commandString.equals("UNREGISTER")) {
-      return Optional.of(new Command(Command.Type.UNREGISTER, sourceNumber));
+      return Optional.of(new UnregisterCommand(sourceNumber));
     }
 
     return Optional.empty();

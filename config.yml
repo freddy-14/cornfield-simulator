@@ -1,6 +1,11 @@
 cornGrowIntervalMinutes: 1
 cornHarvestIntervalMinutes: 2
 
+twilio:
+  accountSid: abcd
+  authToken: 1234
+  phoneNumber: 5678
+
 server:
   type: simple
   applicationContextPath: /

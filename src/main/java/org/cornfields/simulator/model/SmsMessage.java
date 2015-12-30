@@ -3,14 +3,14 @@ package org.cornfields.simulator.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.NotEmpty;
 
-public class SmsResponse {
+public class SmsMessage {
 
   @NotEmpty private String destinationNumber;
   @NotEmpty private String message;
 
-  public SmsResponse() { }
+  public SmsMessage() { }
 
-  public SmsResponse(String destinationNumber, String message) {
+  public SmsMessage(String destinationNumber, String message) {
     this.destinationNumber = destinationNumber;
     this.message           = message;
   }
