@@ -1,7 +1,7 @@
 package org.cornfields.simulator;
 
 import org.cornfields.simulator.command.Command;
-import org.cornfields.simulator.model.SmsResponse;
+import org.cornfields.simulator.model.SmsMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,8 +17,8 @@ public class CornExceptionMappers {
 
     @Override
     public Response toResponse(CommandNotAllowedException e) {
-      Command     command  = e.getCommand();
-      SmsResponse response = new SmsResponse(command.getFarmerId(), e.getMessage());
+      Command    command  = e.getCommand();
+      SmsMessage response = new SmsMessage(command.getFarmerId(), e.getMessage());
 
       log.warn("stopped " + command.getFarmerId() + " from using " + command.getType() + " incorrectly");
 

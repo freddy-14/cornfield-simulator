@@ -4,7 +4,7 @@ import com.twilio.sdk.TwilioRestException;
 import com.twilio.sdk.resource.factory.SmsFactory;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.cornfields.simulator.model.SmsResponse;
+import org.cornfields.simulator.model.SmsMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ public class SmsSender {
     this.fromNumber = fromNumber;
   }
 
-  public void send(SmsResponse message) throws TwilioRestException {
+  public void send(SmsMessage message) throws TwilioRestException {
     List<NameValuePair> params = new ArrayList<>();
 
     params.add(new BasicNameValuePair("To",   message.getDestinationNumber()));
