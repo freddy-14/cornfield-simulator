@@ -46,4 +46,12 @@ public class CommandFactoryTest {
     assert !command.isPresent();
   }
 
+  @Test
+  public void testCommandTypeUnregister() {
+    final CommandFactory    factory = new CommandFactory();
+    final Optional<Command> command = factory.create("555", "UNREGISTER");
+
+    assert command.isPresent();
+  }
+
 }
