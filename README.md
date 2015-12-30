@@ -12,7 +12,7 @@ $ mvn package
 
 ## Run
 ```
-$ java -jar target/cornfield-simulator-0.1.jar server corn.yml
+$ java -jar target/cornfield-simulator-0.1.jar server config.yml
 ```
 
 ## License
