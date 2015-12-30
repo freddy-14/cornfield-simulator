@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
 
-public class CornHarvestTask extends CallableTask<Long> {
+public class CornHarvestTask extends RunnableTask {
 
   private static final Logger log = LoggerFactory.getLogger(CornHarvestTask.class);
 
@@ -34,7 +34,7 @@ public class CornHarvestTask extends CallableTask<Long> {
   }
 
   @Override
-  public Long call() {
+  public void run() {
     cornfieldMap.getCornfields().forEach(cornfield -> {
       log.info("harvesting corn from " + cornfield.getId());
 
@@ -49,7 +49,6 @@ public class CornHarvestTask extends CallableTask<Long> {
     });
 
     log.info("corn harvest event yielded " + totalHarvestCount + " corn");
-    return totalHarvestCount;
   }
 
 }

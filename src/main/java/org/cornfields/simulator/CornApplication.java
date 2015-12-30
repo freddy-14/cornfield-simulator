@@ -11,7 +11,13 @@ import org.cornfields.simulator.resource.SmsRespondingResource;
 import org.cornfields.simulator.task.CornGrowTask;
 import org.cornfields.simulator.task.CornHarvestTask;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 public class CornApplication extends Application<CornConfig> {
+
+  private static final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
 
   @Override
   public String getName() {
@@ -30,12 +36,21 @@ public class CornApplication extends Application<CornConfig> {
     SmsRespondingResource smsResponder   = new SmsRespondingResource(commandFactory, simulator);
 
     environment.healthChecks().register("dumb", new DumbCheck());
-
-    environment.admin().addTask(new CornGrowTask(cornfields));
-    environment.admin().addTask(new CornHarvestTask(farmers, cornfields));
-
     environment.jersey().register(new CornExceptionMappers.CommandNotAllowed());
     environment.jersey().register(smsResponder);
+
+    CornGrowTask    growTask    = new CornGrowTask(cornfields);
+    CornHarvestTask harvestTask = new CornHarvestTask(farmers, cornfields);
+
+    environment.admin().addTask(growTask);
+    environment.admin().addTask(harvestTask);
+
+    executor.scheduleAtFixedRate(
+        growTask, 0, config.getCornGrowIntervalMinutes(), TimeUnit.MINUTES
+    );
+    executor.scheduleAtFixedRate(
+        harvestTask, 1, config.getCornHarvestIntervalMinutes(), TimeUnit.MINUTES
+    );
   }
 
   public static void main(String[] args) throws Exception {

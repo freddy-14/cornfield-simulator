@@ -4,7 +4,7 @@ import org.cornfields.simulator.game.CornfieldMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class CornGrowTask extends CallableTask<Long> {
+public class CornGrowTask extends RunnableTask {
 
   private static final Logger log = LoggerFactory.getLogger(CornGrowTask.class);
 
@@ -17,7 +17,7 @@ public class CornGrowTask extends CallableTask<Long> {
   }
 
   @Override
-  public Long call() {
+  public void run() {
     cornfieldMap.getCornfields().forEach(cornfield -> {
       log.info("growing corn on field " + cornfield.getId());
 
@@ -31,7 +31,6 @@ public class CornGrowTask extends CallableTask<Long> {
     });
 
     log.info("corn grow event yielded " + totalGrowCount + " corn");
-    return totalGrowCount;
   }
 
 }
