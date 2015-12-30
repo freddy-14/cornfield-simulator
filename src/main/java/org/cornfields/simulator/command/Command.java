@@ -3,7 +3,7 @@ package org.cornfields.simulator.command;
 public class Command {
 
   public enum Type {
-    REGISTER, TRAVEL, CORN
+    REGISTER, TRAVEL, CORN, UNREGISTER
   }
 
   private final Type   type;
