@@ -1,3 +1,6 @@
+cornGrowIntervalMinutes: 1
+cornHarvestIntervalMinutes: 2
+
 server:
   type: simple
   applicationContextPath: /
