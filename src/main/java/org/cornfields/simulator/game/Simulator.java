@@ -35,8 +35,7 @@ public class Simulator {
         return new SmsMessage(command.getFarmerId(), "ok");
 
       case CORN:
-        // todo: return a count of the farmers corn instead
-        return new SmsMessage(command.getFarmerId(), "ok");
+        return new SmsMessage(command.getFarmerId(), "count: " + farmer.get().countCorn());
 
       case UNREGISTER:
         farmerDatabase.unregister(command.getFarmerId());
