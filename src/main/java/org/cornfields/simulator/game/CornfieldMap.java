@@ -17,7 +17,10 @@ public class CornfieldMap implements FarmerDatabaseListener {
   private final Map<Long, Cornfield> cornfields = new ConcurrentHashMap<>();
   private final Object               txnLock    = new Object();
 
-  public CornfieldMap() {
+  private final TurnTracker turnTracker;
+
+  public CornfieldMap(TurnTracker turnTracker) {
+    this.turnTracker = turnTracker;
     LongStream.range(1, 11)
               .forEach(l -> cornfields.put(l, new Cornfield(l)));
   }
@@ -44,6 +47,8 @@ public class CornfieldMap implements FarmerDatabaseListener {
   public void travel(TravelCommand travel) throws CommandNotAllowedException {
     if (travel.getCornfieldId() < 1 || travel.getCornfieldId() > 10) {
       throw new CommandNotAllowedException(travel, "unknown cornfield, valid numbers are 1-10");
+    } else if (!turnTracker.takeTurn(travel.getFarmerId())) {
+      throw new CommandNotAllowedException(travel, "no turns remaining");
     }
 
     synchronized (txnLock) {

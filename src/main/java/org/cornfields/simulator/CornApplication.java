@@ -7,7 +7,8 @@ import org.cornfields.simulator.config.CornConfig;
 import org.cornfields.simulator.game.CornfieldMap;
 import org.cornfields.simulator.game.FarmerDatabase;
 import org.cornfields.simulator.game.Simulator;
-import org.cornfields.simulator.health.DumbCheck;
+import org.cornfields.simulator.game.TurnTracker;
+import org.cornfields.simulator.health.CornfieldHealthCheck;
 import org.cornfields.simulator.resource.SmsRespondingResource;
 import org.cornfields.simulator.task.CornGrowTask;
 import org.cornfields.simulator.task.CornHarvestTask;
@@ -29,11 +30,13 @@ public class CornApplication extends Application<CornConfig> {
 
   @Override
   public void run(CornConfig config, Environment environment) throws Exception {
-    FarmerDatabase   farmers    = new FarmerDatabase();
-    CornfieldMap     cornfields = new CornfieldMap();
-    Simulator        simulator  = new Simulator(farmers, cornfields);
-    TwilioTranslator translator = new TwilioTranslator();
+    FarmerDatabase   farmers     = new FarmerDatabase();
+    TurnTracker      turnTracker = new TurnTracker();
+    CornfieldMap     cornfields  = new CornfieldMap(turnTracker);
+    Simulator        simulator   = new Simulator(farmers, cornfields);
+    TwilioTranslator translator  = new TwilioTranslator();
 
+    farmers.addListener(turnTracker);
     farmers.addListener(cornfields);
 
     CommandFactory        commandFactory = new CommandFactory();
@@ -49,7 +52,7 @@ public class CornApplication extends Application<CornConfig> {
         harvestTask, 1, config.getCornHarvestIntervalMinutes(), TimeUnit.MINUTES
     );
 
-    environment.healthChecks().register("dumb", new DumbCheck());
+    environment.healthChecks().register("cornfields", new CornfieldHealthCheck(cornfields));
 
     environment.jersey().register(new CornExceptionMappers.CommandNotAllowed(translator));
     environment.jersey().register(new TwilioResponseWriter());
